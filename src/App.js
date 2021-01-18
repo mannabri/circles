@@ -21,11 +21,8 @@ class App extends Component {
     const newCirclesArray = [...this.state.circles];
     newCirclesArray.push({ color: color });
 
-    const newActiveColorIndex = this.state.activeColorIndex + 1;
-
     this.setState({
-      circles: newCirclesArray,
-      activeColorIndex: newActiveColorIndex
+      circles: newCirclesArray
     })
   }
 
