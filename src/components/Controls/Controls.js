@@ -6,7 +6,6 @@ const controls = props => {
   }
   return (
     <div
-      key={"hallo"} 
       className={styles.Controls} 
       style={customStyle}
       onClick={props.clicked}

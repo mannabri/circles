@@ -1,7 +1,7 @@
 import { Component } from 'react';
 
 import styles from './App.module.css';
-import GrowingCircle from './components/GrowingCircle/GrowingCircle';
+import Circle from './components/Circle/Circle';
 import Controls from './components/Controls/Controls';
 
 class App extends Component {
@@ -17,23 +17,23 @@ class App extends Component {
     ]
   }
 
-  handleNewCircle = color => {
+  handleAddCircle = color => {
     const newCirclesArray = [...this.state.circles];
     newCirclesArray.push({ color: color });
 
     const newActiveColorIndex = this.state.activeColorIndex + 1;
 
-    this.setState({ 
+    this.setState({
       circles: newCirclesArray,
       activeColorIndex: newActiveColorIndex
-     })
+    })
   }
 
   render() {
     let circles = null
 
     if (this.state.circles) {
-      circles = this.state.circles.map(c => <GrowingCircle color={c.color} />)
+      circles = this.state.circles.map((circle, index) => <Circle key={index} color={circle.color} />)
     }
 
     const activeColor = this.state.colors[
@@ -42,7 +42,7 @@ class App extends Component {
 
     return (
       <div className={styles.App}>
-        <Controls color={activeColor} clicked={() => this.handleNewCircle(activeColor)} />
+        <Controls color={activeColor} clicked={() => this.handleAddCircle(activeColor)} />
         {circles}
       </div>
     );

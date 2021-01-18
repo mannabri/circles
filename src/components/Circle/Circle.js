@@ -1,4 +1,4 @@
-import styles from './GrowingCircle.module.css';
+import styles from './Circle.module.css';
 
 const circle = props => {
   const userStyle = {
@@ -6,7 +6,11 @@ const circle = props => {
   }
 
   return (
-    <div className={styles.Circle} style={userStyle}></div>
+    <div
+      className={styles.Circle} 
+      style={userStyle}
+    >
+    </div>
   )
 }
 
