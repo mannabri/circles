@@ -1,25 +1,52 @@
-import logo from './logo.svg';
-import './App.css';
+import { Component } from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import styles from './App.module.css';
+import GrowingCircle from './components/GrowingCircle/GrowingCircle';
+import Controls from './components/Controls/Controls';
+
+class App extends Component {
+  state = {
+    circles: [],
+    colors: [
+      '#01BEFE',
+      '#FFDD00',
+      '#FF7D00',
+      '#FF006D',
+      '#ADFF02',
+      '#8F00FF',
+    ]
+  }
+
+  handleNewCircle = color => {
+    const newCirclesArray = [...this.state.circles];
+    newCirclesArray.push({ color: color });
+
+    const newActiveColorIndex = this.state.activeColorIndex + 1;
+
+    this.setState({ 
+      circles: newCirclesArray,
+      activeColorIndex: newActiveColorIndex
+     })
+  }
+
+  render() {
+    let circles = null
+
+    if (this.state.circles) {
+      circles = this.state.circles.map(c => <GrowingCircle color={c.color} />)
+    }
+
+    const activeColor = this.state.colors[
+      Math.floor(Math.random() * this.state.colors.length)
+    ];
+
+    return (
+      <div className={styles.App}>
+        <Controls color={activeColor} clicked={() => this.handleNewCircle(activeColor)} />
+        {circles}
+      </div>
+    );
+  }
 }
 
 export default App;
